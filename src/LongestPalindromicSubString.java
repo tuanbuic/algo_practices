@@ -1,6 +1,6 @@
 import java.util.HashSet;
 
-public class LongestSubstringWithoutRepeating {
+public class LongestPalindromicSubString {
     public static int lengthOfLongestSubstring(String s) {
         // HashSet to store characters in the current window
         HashSet<Character> charSet = new HashSet<>();
