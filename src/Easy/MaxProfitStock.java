@@ -1,3 +1,5 @@
+package Easy;
+
 public class MaxProfitStock {
     static int maxLen = 0;
     static int lowest = 0;
