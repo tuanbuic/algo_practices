@@ -3,53 +3,30 @@ package Normal;
 import java.util.HashSet;
 
 public class LongestPalindromicSubString {
-    public static int lengthOfLongestSubstring(String s) {
-        // HashSet to store characters in the current window
-        HashSet<Character> charSet = new HashSet<>();
-        int left = 0, maxLength = 0;
+    static int maxLen = 0;
+    static int lowest = 0;
 
-        // Sliding window with right pointer
-        for (int right = 0; right < s.length(); right++) {
-            // Shrink window if the character is already in the set
-            while (charSet.contains(s.charAt(right))) {
-                charSet.remove(s.charAt(left));
-                left++;
-            }
-            // Add current character to the set
-            charSet.add(s.charAt(right));
-            // Update maxLength
-            maxLength = Math.max(maxLength, right - left + 1);
-        }
-
-        return maxLength;
+    public static void main(String args[]) {
+        System.out.println(longestPalindrome("babad"));
     }
 
-    public static int lengthOfLongestSubstringHasmap(String s) {
-        // HashSet to store characters in the current window
-        HashSet<Character> charSet = new HashSet<>();
-        int left = 0, maxLength = 0;
-
-        // Sliding window with right pointer
-        for (int right = 0; right < s.length(); right++) {
-            // Shrink window if the character is already in the set
-            while (charSet.contains(s.charAt(right))) {
-                charSet.remove(s.charAt(left));
-                left++;
-            }
-            // Add current character to the set
-            charSet.add(s.charAt(right));
-            // Update maxLength
-            maxLength = Math.max(maxLength, right - left + 1);
+    public static String longestPalindrome(String s) {
+        char[] input = s.toCharArray();
+        for (int i = 0; i <= input.length; i++) {
+            expandPandlinrome(input, i, i);
+            expandPandlinrome(input, i, i + 1);
         }
-
-        return maxLength;
+        return s.substring(lowest, maxLen + lowest);
     }
 
-    public static void main(String[] args) {
-        // Test cases
-        System.out.println(lengthOfLongestSubstring("abcabcbb")); // Output: 3
-//        System.out.println(lengthOfLongestSubstring("bbbbb"));    // Output: 1
-//        System.out.println(lengthOfLongestSubstring("pwwkew"));   // Output: 3
-//        System.out.println(lengthOfLongestSubstring(""));         // Output: 0
+    public static void expandPandlinrome(char[] s, int l, int r) {
+        while (r < s.length && l >= 0 && s[l] == s[r]) {
+            l--;
+            r++;
+        }
+        if (maxLen < r - l - 1) {
+            maxLen = r - l - 1;
+            lowest = l + 1;
+        }
     }
 }
